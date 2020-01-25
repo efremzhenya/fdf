@@ -6,13 +6,19 @@
 /*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:42:32 by lseema            #+#    #+#             */
-/*   Updated: 2019/11/12 20:43:44 by lseema           ###   ########.fr       */
+/*   Updated: 2020/01/25 18:06:47 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFF_SIZE 128
+# define MAX 255
 # include <string.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <unistd.h>
 
 typedef	struct	s_list
 {
@@ -79,5 +85,7 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-
+/* get_next_line*/
+int     get_next_line(const int fd, char **line);
+int     ft_new_line(char **s, char **line, int fd, int offset);
 #endif

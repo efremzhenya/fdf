@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 19:30:08 by lseema            #+#    #+#             */
-/*   Updated: 2019/05/20 18:47:22 by lseema           ###   ########.fr       */
+/*   Updated: 2020/01/25 18:07:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 void	ft_memdel(void **ap)

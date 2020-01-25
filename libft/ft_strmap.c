@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 14:32:08 by lseema            #+#    #+#             */
-/*   Updated: 2019/05/26 21:28:34 by lseema           ###   ########.fr       */
+/*   Updated: 2020/01/25 18:07:17 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strmap(char const *s, char (*f)(char))

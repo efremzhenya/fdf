@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 16:52:12 by lseema            #+#    #+#             */
-/*   Updated: 2019/05/20 18:50:52 by lseema           ###   ########.fr       */
+/*   Updated: 2020/01/25 18:07:11 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 void	ft_putstr(char const *s)

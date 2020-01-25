@@ -10,7 +10,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
+            "args": ["test_maps/42.fdf"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

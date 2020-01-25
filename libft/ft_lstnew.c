@@ -6,11 +6,10 @@
 /*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 20:49:19 by lseema            #+#    #+#             */
-/*   Updated: 2019/05/27 21:03:09 by lseema           ###   ########.fr       */
+/*   Updated: 2020/01/25 18:06:58 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
