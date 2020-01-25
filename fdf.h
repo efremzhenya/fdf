@@ -14,9 +14,10 @@ typedef struct
     void *win_ptr;
 }       fdf_struct;
 
-void read_file(char* name, fdf_struct *data);
+void    read_file(char* name, fdf_struct *data);
 int     get_width(char *name);
 int     get_height(char *name);
 int		ft_wdcounter(char const *str, char c);
+void    fill_z_matrix(int *new_line, char *line);
 
 #endif
