@@ -13,7 +13,6 @@ void    print_file(fdf_struct *data)
     int i;
     int j;
 
-    j = 0;
     i = 0;
     while (i < data->h)
     {
