@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 21:52:42 by lseema            #+#    #+#             */
-/*   Updated: 2020/01/25 17:35:06 by lseema           ###   ########.fr       */
+/*   Updated: 2020/02/01 14:27:37 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_new_line(char **str, char **line, int fd, int ret)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*str[MAX];
+	static char	*str[MAX_CHAR];
 	char		buf[BUFF_SIZE + 1];
 	char		*temp;
 	ssize_t		offset;

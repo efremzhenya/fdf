@@ -11,6 +11,7 @@
                 "-g",
                 "${fileDirname}/fdf.c",
                 "${fileDirname}/reader.c",
+                "${fileDirname}/draw.c",
                 "${fileDirname}/libft/get_next_line.c",
                 "${fileDirname}/libft/ft_strchr.c",
                 "${fileDirname}/libft/ft_strdel.c",

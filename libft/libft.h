@@ -6,14 +6,14 @@
 /*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:42:32 by lseema            #+#    #+#             */
-/*   Updated: 2020/01/25 18:06:47 by lseema           ###   ########.fr       */
+/*   Updated: 2020/02/01 14:28:03 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # define BUFF_SIZE 128
-# define MAX 255
+# define MAX_CHAR 255
 # include <string.h>
 # include <fcntl.h>
 # include <stdlib.h>
