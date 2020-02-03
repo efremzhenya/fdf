@@ -1,82 +1,5 @@
 #include "fdf.h"
 
-void three_d(float *x, float *y, int z)
-{
-    *x = (*x - *y) * cos(0.523599);
-    *y = (*x + *y) * sin(0.523599) - z;
-}
-
-static void rotate_x(float *y, float *z, int angle)
-{
-    double radian;
-    float temp_y;
-
-    temp_y = *y;
-    radian = (double)(angle * 3.14)/(double)180;
-    *y = temp_y * cos(radian) + *z * sin(radian);
-    *z = -temp_y * sin(radian) + *z * cos(radian);
-}
-
-static void	rotate_y(float *x, float *z, int angle)
-{
-    double radian;
-    float temp_x;
-
-	temp_x = *x;
-    radian = (double)(angle * 3.14)/(double)180;
-	*x = temp_x * cos(radian) + *z * sin(radian);
-	*z = -temp_x * sin(radian) + *z * cos(radian);
-}
-
-static void	rotate_z(float *x, float *y, int angle)
-{
-	float temp_x;
-	float temp_y;
-    double radian;
-
-	temp_x = *x;
-	temp_y = *y;
-    radian = (double)(angle * 3.14)/(double)180;
-	*x = temp_x * cos(angle) - temp_y * sin(radian);
-	*y = temp_y * sin(angle) + temp_y * cos(radian);
-}
-
-
-double percent(int start, int end, int current)
-{
-    double placement;
-    double distance;
-
-    placement = current - start;
-    distance = end - start;
-    return ((distance == 0) ? 1.0 : (placement / distance));
-}
-
-int get_light(int start, int end, double percentage)
-{
-    return ((int)((1 - percentage) * start + percentage * end));
-}
-
-int get_color(fdf_point current, fdf_point start, fdf_point end, fdf_point delta)
-{
-    int     red;
-    int     green;
-    int     blue;
-    double  percentage;
-
-    if (current.color == end.color)
-        return (current.color);
-    // if (delta.x > delta.y)
-    //     percentage = percent(start.x, end.x, current.x);
-    // else
-    //     percentage = percent(start.y, end.y, current.y);
-    percentage = percent(start.z, end.z, current.z);
-    red = get_light((start.color >> 16) & 0xFF, (end.color >> 16) & 0xFF, percentage);
-    green = get_light((start.color >> 8) & 0xFF, (end.color >> 8) & 0xFF, percentage);
-    blue = get_light(start.color & 0xFF, end.color & 0xFF, percentage);
-    return ((red << 16) | (green << 8) | blue);
-}
-
 void    bresenham(float x, float y, float x1, float y1, fdf_struct *data)
 {
     float x_step;
@@ -160,22 +83,8 @@ void draw_map(fdf_struct *data)
     int x;
     int y;
 
+    before_draw(data);
     y = 0;
-    if (data->x_rotate == 360)
-        data->x_rotate = 0;
-    if (data->x_rotate == -3)
-        data->x_rotate = 357;
-
-    if (data->y_rotate == 360)
-        data->y_rotate = 0;
-    if (data->y_rotate == -3)
-        data->y_rotate = 357;
-
-    if (data->z_rotate == 360)
-        data->z_rotate = 0;
-    if (data->z_rotate == -3)
-        data->z_rotate = 357;
-
     while (data->h > y)
     {
         x = 0;
@@ -195,6 +104,24 @@ void draw_map(fdf_struct *data)
     }
 }
 
+
+void before_draw(fdf_struct *data)
+{
+    if (data->x_rotate == 360)
+        data->x_rotate = 0;
+    if (data->x_rotate == -3)
+        data->x_rotate = 357;
+
+    if (data->y_rotate == 360)
+        data->y_rotate = 0;
+    if (data->y_rotate == -3)
+        data->y_rotate = 357;
+
+    if (data->z_rotate == 360)
+        data->z_rotate = 0;
+    if (data->z_rotate == -3)
+        data->z_rotate = 357;
+}
 
 void	draw_menu(fdf_struct *data)
 {
