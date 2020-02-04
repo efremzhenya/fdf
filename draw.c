@@ -75,8 +75,7 @@ void before_draw(fdf_struct *data)
 void	draw_menu(fdf_struct *data)
 {
 	char *msg;
-    char *value;
-    char *k;
+
     if (data->is_hide)
     {
         msg = "MOVE: up, down, left, right";

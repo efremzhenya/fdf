@@ -67,5 +67,6 @@ void    set_start_settings(char *arg,fdf_struct *data);
 void    translation_xyz(fdf_point *p1, fdf_point *p2, fdf_struct *data);
 void    set_extremums(fdf_struct *data);
 int     get_color_z(float current, float start, float end, fdf_struct *data);
+void    free_arr(fdf_struct *data);
 
 #endif

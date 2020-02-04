@@ -5,7 +5,7 @@ int key_handler(int key, fdf_struct *data)
     if (key == ESC)
     {
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-        free(data->z_matrix);
+        free_arr(data);
         free(data);
         exit(0);
     }

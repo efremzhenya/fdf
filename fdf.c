@@ -1,5 +1,19 @@
 #include "fdf.h"
 
+void    free_arr(fdf_struct *data)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < data->h)
+    {
+        free(data->z_matrix[i]);
+        i++;
+    }
+    free(data->z_matrix);
+}
+
 int main(int argc, char **argv)
 {
     fdf_struct *data;
@@ -16,6 +30,7 @@ int main(int argc, char **argv)
     {
         error("Some error\n");
     }
-    
+    free_arr(data);
+    free(data);
     return 0;
 }
