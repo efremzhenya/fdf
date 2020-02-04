@@ -92,11 +92,10 @@ int main(int argc, char **argv)
         //print_file(data);
         data->zoom = 40;
         data->mlx_ptr = mlx_init();
-        data->win_ptr = mlx_new_window(data->mlx_ptr, 2000, 2000, "FDF");
+        data->win_ptr = mlx_new_window(data->mlx_ptr, WINWIDTH, WINWIDTH, "FDF");
         draw_map(data);
         draw_menu(data);
         mlx_key_hook(data->win_ptr, key_handler, data);
-        //mlx_mouse_hook(data->win_ptr, mouse_handler, data);
         mlx_loop(data->mlx_ptr);
     }
     else

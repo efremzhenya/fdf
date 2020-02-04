@@ -2,6 +2,8 @@
 # define FDF_H
 # define MAX(a, b) (a > b ? a : b)
 # define MOD(a) ((a < 0) ? -a : a)
+# define WINWIDTH 1000
+# define WINHEIGHT 1000
 # define ESC 53
 # define RIGHT 124
 # define LEFT 123
@@ -43,9 +45,6 @@ typedef struct
     int color;
 }       fdf_point;
 
-
-
-
 void    read_file(char* name, fdf_struct *data);
 int		ft_wdcounter(char const *str, char c);
 void    fill_z_matrix(int *new_line, char *line);
@@ -54,5 +53,11 @@ void    draw_map(fdf_struct *data);
 void    three_d(float *x, float *y, int z);
 int     key_handler(int key, fdf_struct *data);
 void	draw_menu(fdf_struct *data);
+void    rotate_x(float *y, float *z, int angle);
+void	rotate_y(float *x, float *z, int angle);
+void	rotate_z(float *x, float *y, int angle);
+void    before_draw(fdf_struct *data);
+void    error(char *msg);
+int     get_color(fdf_point current, fdf_point start, fdf_point end, fdf_point delta);
 
 #endif

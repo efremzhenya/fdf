@@ -6,7 +6,7 @@ void three_d(float *x, float *y, int z)
     *y = (*x + *y) * sin(0.523599) - z;
 }
 
-static void rotate_x(float *y, float *z, int angle)
+void rotate_x(float *y, float *z, int angle)
 {
     double radian;
     float temp_y;
@@ -17,7 +17,7 @@ static void rotate_x(float *y, float *z, int angle)
     *z = -temp_y * sin(radian) + *z * cos(radian);
 }
 
-static void	rotate_y(float *x, float *z, int angle)
+void	rotate_y(float *x, float *z, int angle)
 {
     double radian;
     float temp_x;
@@ -28,7 +28,7 @@ static void	rotate_y(float *x, float *z, int angle)
 	*z = -temp_x * sin(radian) + *z * cos(radian);
 }
 
-static void	rotate_z(float *x, float *y, int angle)
+void	rotate_z(float *x, float *y, int angle)
 {
 	float temp_x;
 	float temp_y;

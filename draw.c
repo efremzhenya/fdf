@@ -16,7 +16,7 @@ void    bresenham(float x, float y, float x1, float y1, fdf_struct *data)
     z = data->z_matrix[(int)y][(int)x];
     z1 = data->z_matrix[(int)y1][(int)x1];
 
-    color = (z > 0 || z1 > 0) ? 0xe80c0c : 0xffffff;
+    color = (z > 0 || z1 > 0) ? 1 : 0;
     rotate_x(&y, &z, data->x_rotate);
     rotate_x(&y1,&z1, data->x_rotate);
     rotate_y(&x, &z, data->y_rotate);
@@ -44,7 +44,6 @@ void    bresenham(float x, float y, float x1, float y1, fdf_struct *data)
     x_step = x1 - x;
     y_step = y1 - y;
     z_step = z1 - z;
-
     max = MAX(MOD(x_step), MOD(y_step));
     x_step /= max;
     y_step /= max;
@@ -68,10 +67,10 @@ void    bresenham(float x, float y, float x1, float y1, fdf_struct *data)
     while ((int)(x - x1) || (int)(y - y1))
     {
         current.z = z;
-        if (color == 0xe80c0c)
+        if (color == 1)
             mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, get_color(current, start, end, delta));
         else
-            mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
+            mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, start.color);
         x += x_step;
         y += y_step;
         z += z_step;
@@ -104,23 +103,31 @@ void draw_map(fdf_struct *data)
     }
 }
 
-
 void before_draw(fdf_struct *data)
 {
-    if (data->x_rotate == 360)
+    char *msg;
+
+    if (data->x_rotate >= 360)
         data->x_rotate = 0;
-    if (data->x_rotate == -3)
+    if (data->x_rotate <= -3)
         data->x_rotate = 357;
 
-    if (data->y_rotate == 360)
+    if (data->y_rotate >= 360)
         data->y_rotate = 0;
-    if (data->y_rotate == -3)
+    if (data->y_rotate <= -3)
         data->y_rotate = 357;
 
-    if (data->z_rotate == 360)
+    if (data->z_rotate >= 360)
         data->z_rotate = 0;
-    if (data->z_rotate == -3)
+    if (data->z_rotate <= -3)
         data->z_rotate = 357;
+
+    if (data->zoom >= 200 || data->zoom <= 0)
+    {
+        msg = "ERROR ON MAX/MIN ZOOM!";
+        mlx_string_put(data->mlx_ptr, data->win_ptr, (WINWIDTH-170)/2, (WINHEIGHT-100)/2, 0xE85E5E, msg);
+        data->zoom = (data->zoom>=200) ? 200 : 1;
+    }
 }
 
 void	draw_menu(fdf_struct *data)
@@ -141,17 +148,6 @@ void	draw_menu(fdf_struct *data)
         msg = "EXIT: Esc";
         mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 65, 0x03fc35, msg);
         msg = "HIDE INFO: H";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 80, 0x03fc35, msg);
-        
-        //value = (char*)malloc(sizeof(char) * (10 + 1));
-        //*(value + 0) = "Rotate X:";
-        // variable[0] = 'X';
-        // variable[1] = ':';
-        // variable[2] = ' ';
-        // int size = ft_strlen(ft_itoa(data->x_shift)); 
-        // value = ft_memalloc(size + 1);
-
-        // value = ft_itoa(data->x_shift);
-        // free(value);
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 80, 0x03fc35, msg);   
     }
 }
