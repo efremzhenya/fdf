@@ -34,7 +34,7 @@ int key_handler(int key, fdf_struct *data)
     else if (key == 4)
         data->is_hide = data->is_hide ? 0 : 1;
     mlx_clear_window(data->mlx_ptr, data->win_ptr);
-    draw_map(data);
+    draw_map(0, 0, data);
     draw_menu(data);
     
     return(0);
@@ -51,7 +51,7 @@ int mouse_handler(int key, fdf_struct *data)
     {
         data->zoom -= 5;
     }
-     draw_map(data);
+     draw_map(0, 0, data);
     
     return(0);
 }

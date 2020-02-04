@@ -1,10 +1,8 @@
 #include "fdf.h"
 
-void    bresenham(float x, float y, float x1, float y1, fdf_struct *data)
+void    bresenham(fdf_point p1, fdf_point p2, fdf_struct *data)
 {
-    float x_step;
-    float y_step;
-    float z_step;
+    fdf_point step;
     int max;
     float z;
     float z1;
@@ -12,90 +10,65 @@ void    bresenham(float x, float y, float x1, float y1, fdf_struct *data)
     fdf_point current;
     fdf_point start;
     fdf_point end;
-    fdf_point delta;
-    z = data->z_matrix[(int)y][(int)x];
-    z1 = data->z_matrix[(int)y1][(int)x1];
 
-    color = (z > 0 || z1 > 0) ? 1 : 0;
-    rotate_x(&y, &z, data->x_rotate);
-    rotate_x(&y1,&z1, data->x_rotate);
-    rotate_y(&x, &z, data->y_rotate);
-    rotate_y(&x1,&z1, data->y_rotate);
-    rotate_z(&x, &y, data->z_rotate);
-    rotate_z(&x1, &y1, data->z_rotate);
-    x *= data->zoom;
-    y *= data->zoom;
-    z *= data->zoom;
-    z1 *= data->zoom;
-    x1 *= data->zoom;
-    y1 *= data->zoom;
+    color = (p1.z > 0 || p2.z > 0) ? 1 : 0;
+    translation_xyz(&p1, &p2, data);
 
-    x += data->x_shift;
-    y += data->y_shift;
-    x1 += data->x_shift;
-    y1 += data->y_shift;
+    step.x = p2.x - p1.x;
+    step.y = p2.y - p1.y;
+    step.z = p2.z - p1.z;
+    max = MAX(MOD(step.x), MOD(step.y));
+    step.x /= max;
+    step.y /= max;
+    step.z /= max;
 
-    if (data->is_isometric)
+    if (p1.z > p2.z)
     {
-        three_d(&x, &y, z);
-        three_d(&x1, &y1, z1);
-    }
-
-    x_step = x1 - x;
-    y_step = y1 - y;
-    z_step = z1 - z;
-    max = MAX(MOD(x_step), MOD(y_step));
-    x_step /= max;
-    y_step /= max;
-    z_step /= max;
-
-    if (z > z1)
-    {
-        start.z = z1;
-        end.z = z;
+        start.z = p2.z;
+        end.z = p1.z;
     }
     else
     {
-        start.z = z;
-        end.z = z1;
+        start.z = p1.z;
+        end.z = p2.z;
     }
-    
-    delta.z = z_step;
 
     start.color = 0x008000;
     end.color = 0x800080;
-    while ((int)(x - x1) || (int)(y - y1))
+    while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
     {
-        current.z = z;
+        current.z = p1.z;
         if (color == 1)
-            mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, get_color(current, start, end, delta));
+            mlx_pixel_put(data->mlx_ptr, data->win_ptr, p1.x, p1.y, get_color(current, start, end));
         else
-            mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, start.color);
-        x += x_step;
-        y += y_step;
-        z += z_step;
+            mlx_pixel_put(data->mlx_ptr, data->win_ptr, p1.x, p1.y, start.color);
+        p1.x += step.x;
+        p1.y += step.y;
+        p1.z += step.z;
     }
 }
 
-void draw_map(fdf_struct *data)
+void draw_map(int x, int y, fdf_struct *data)
 {
-    int x;
-    int y;
+    fdf_point p1;
+    fdf_point p2;
 
     before_draw(data);
-    y = 0;
     while (data->h > y)
     {
         x = 0;
         while (data->w > x)
         {
+            p1 = (fdf_point){.x = x, .y = y, .z = data->z_matrix[y][x]};
             if (x < data->w - 1)
             {
-                bresenham (x, y, x + 1, y, data);
+                p2 = (fdf_point){.x = x + 1, .y = y, .z = data->z_matrix[y][x + 1]};
+                bresenham(p1, p2, data);
             }
             if (y < data->h - 1)
             {
-                bresenham (x, y, x, y + 1, data);
+                p2 = (fdf_point){.x = x, .y = y + 1, .z = data->z_matrix[y + 1][x]};
+                bresenham(p1, p2, data);
             }
             x++;
         }
@@ -111,17 +84,14 @@ void before_draw(fdf_struct *data)
         data->x_rotate = 0;
     if (data->x_rotate <= -3)
         data->x_rotate = 357;
-
     if (data->y_rotate >= 360)
         data->y_rotate = 0;
     if (data->y_rotate <= -3)
         data->y_rotate = 357;
-
     if (data->z_rotate >= 360)
         data->z_rotate = 0;
     if (data->z_rotate <= -3)
         data->z_rotate = 357;
-
     if (data->zoom >= 200 || data->zoom <= 0)
     {
         msg = "ERROR ON MAX/MIN ZOOM!";

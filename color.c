@@ -15,7 +15,7 @@ int get_light(int start, int end, double percentage)
     return ((int)((1 - percentage) * start + percentage * end));
 }
 
-int get_color(fdf_point current, fdf_point start, fdf_point end, fdf_point delta)
+int get_color(fdf_point current, fdf_point start, fdf_point end)
 {
     int     red;
     int     green;

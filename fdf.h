@@ -16,10 +16,9 @@
 # define NUMPAD_PLUS 69 
 # define NUMPAD_MINUS 78
 # define SPACE 49
+# include <math.h>
 # include "libft/libft.h"
 # include "minilibx_macos/mlx.h"
-#include <math.h>
-
 
 typedef struct 
 {
@@ -34,22 +33,23 @@ typedef struct
     int z_rotate;
     int is_isometric;
     int is_hide;
-
     void *mlx_ptr;
     void *win_ptr;
 }       fdf_struct;
 
 typedef struct 
 {
-    int z;
+    float x;
+    float y;
+    float z;
     int color;
 }       fdf_point;
 
 void    read_file(char* name, fdf_struct *data);
 int		ft_wdcounter(char const *str, char c);
 void    fill_z_matrix(int *new_line, char *line);
-void    bresenham(float x, float y, float x1, float y1, fdf_struct *data);
-void    draw_map(fdf_struct *data);
+void    bresenham(fdf_point p1, fdf_point p2, fdf_struct *data);
+void    draw_map(int x, int y, fdf_struct *data);
 void    three_d(float *x, float *y, int z);
 int     key_handler(int key, fdf_struct *data);
 void	draw_menu(fdf_struct *data);
@@ -58,7 +58,8 @@ void	rotate_y(float *x, float *z, int angle);
 void	rotate_z(float *x, float *y, int angle);
 void    before_draw(fdf_struct *data);
 void    error(char *msg);
-int     get_color(fdf_point current, fdf_point start, fdf_point end, fdf_point delta);
+int     get_color(fdf_point current, fdf_point start, fdf_point end);
 void    set_start_settings(char *arg,fdf_struct *data);
+void    translation_xyz(fdf_point *p1, fdf_point *p2, fdf_struct *data);
 
 #endif
