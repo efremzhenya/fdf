@@ -2,49 +2,21 @@
 
 void    bresenham(fdf_point p1, fdf_point p2, fdf_struct *data)
 {
-    fdf_point step;
-    int max;
-    float z;
-    float z1;
-    int color;
-    fdf_point current;
-    fdf_point start;
-    fdf_point end;
+    int         max;
+    fdf_point   step;
+    fdf_point   cur;
 
-    color = (p1.z > 0 || p2.z > 0) ? 1 : 0;
+    p1.color = get_color_z(p1.z, data->min_z, data->max_z, data);
+    p2.color = get_color_z(p2.z, data->min_z, data->max_z, data);
     translation_xyz(&p1, &p2, data);
-
-    step.x = p2.x - p1.x;
-    step.y = p2.y - p1.y;
-    step.z = p2.z - p1.z;
+    step = (fdf_point){.x = p2.x - p1.x, .y = p2.y - p1.y, .z = p2.z - p1.z};
     max = MAX(MOD(step.x), MOD(step.y));
-    step.x /= max;
-    step.y /= max;
-    step.z /= max;
-
-    if (p1.z > p2.z)
+    step = (fdf_point){.x = step.x / max, .y = step.y / max, .z = step.z / max};
+    cur = (fdf_point) {.x = p1.x, .y = p1.y, .z = p1.z, .color = p1.color};
+    while ((int)(cur.x - p2.x) || (int)(cur.y - p2.y))
     {
-        start.z = p2.z;
-        end.z = p1.z;
-    }
-    else
-    {
-        start.z = p1.z;
-        end.z = p2.z;
-    }
-
-    start.color = 0x008000;
-    end.color = 0x800080;
-    while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
-    {
-        current.z = p1.z;
-        if (color == 1)
-            mlx_pixel_put(data->mlx_ptr, data->win_ptr, p1.x, p1.y, get_color(current, start, end));
-        else
-            mlx_pixel_put(data->mlx_ptr, data->win_ptr, p1.x, p1.y, start.color);
-        p1.x += step.x;
-        p1.y += step.y;
-        p1.z += step.z;
+        mlx_pixel_put(data->mlx_ptr, data->win_ptr, cur.x, cur.y, get_color(cur, p1, p2));
+        cur = (fdf_point){.x = cur.x + step.x, .y = cur.y + step.y, .z = cur.z + step.z};
     }
 }
 

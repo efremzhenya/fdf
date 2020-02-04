@@ -43,7 +43,7 @@ void fill_matrix(int *new_line, char *line)
 {
     int i;
     int j;
-    char **z_arr; 
+    char **z_arr;
 
     i = 0;
     j = 0;
