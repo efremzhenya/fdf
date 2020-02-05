@@ -31,15 +31,15 @@ void draw_map(int x, int y, fdf_struct *data)
         x = 0;
         while (data->w > x)
         {
-            p1 = (fdf_point){.x = x, .y = y, .z = data->z_matrix[y][x]};
+            p1 = (fdf_point){.x = x, .y = y, .z = data->z_matrix[y][x].z};
             if (x < data->w - 1)
             {
-                p2 = (fdf_point){.x = x + 1, .y = y, .z = data->z_matrix[y][x + 1]};
+                p2 = (fdf_point){.x = x + 1, .y = y, .z = data->z_matrix[y][x + 1].z};
                 bresenham(p1, p2, data);
             }
             if (y < data->h - 1)
             {
-                p2 = (fdf_point){.x = x, .y = y + 1, .z = data->z_matrix[y + 1][x]};
+                p2 = (fdf_point){.x = x, .y = y + 1, .z = data->z_matrix[y + 1][x].z};
                 bresenham(p1, p2, data);
             }
             x++;

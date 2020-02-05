@@ -3,6 +3,7 @@
 void error(char *msg)
 {
     ft_putstr(msg);
+    exit(0);
 }
 
 void    set_extremums(fdf_struct *data)
@@ -12,17 +13,17 @@ void    set_extremums(fdf_struct *data)
 
     i = 0;
     j = 0;
-    data->max_z = data->z_matrix[i][j];
-    data->min_z = data->z_matrix[i][j];
+    data->max_z = data->z_matrix[i][j].z;
+    data->min_z = data->z_matrix[i][j].z;
     while (i < data->h)
     {
         j = 0;
         while (j < data->w)
         {
-            if (data->z_matrix[i][j] > data->max_z)
-                data->max_z = data->z_matrix[i][j];
-            if (data->z_matrix[i][j] < data->min_z)
-                data->min_z = data->z_matrix[i][j];
+            if (data->z_matrix[i][j].z > data->max_z)
+                data->max_z = data->z_matrix[i][j].z;
+            if (data->z_matrix[i][j].z < data->min_z)
+                data->min_z = data->z_matrix[i][j].z;
             j++;
         }
         i++;

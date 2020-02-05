@@ -22,9 +22,17 @@
 
 typedef struct 
 {
+    float x;
+    float y;
+    float z;
+    int color;
+}       fdf_point;
+
+typedef struct 
+{
     int w;
     int h;
-    int **z_matrix;
+    fdf_point **z_matrix;
     int zoom;
     int x_shift;
     int y_shift;
@@ -41,17 +49,9 @@ typedef struct
     void *win_ptr;
 }       fdf_struct;
 
-typedef struct 
-{
-    float x;
-    float y;
-    float z;
-    int color;
-}       fdf_point;
-
 void    read_file(char* name, fdf_struct *data);
 int		ft_wdcounter(char const *str, char c);
-void    fill_z_matrix(int *new_line, char *line);
+void    fill_z_matrix(fdf_point *new_line, char *line);
 void    bresenham(fdf_point p1, fdf_point p2, fdf_struct *data);
 void    draw_map(int x, int y, fdf_struct *data);
 void    three_d(float *x, float *y, int z);

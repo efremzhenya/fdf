@@ -39,7 +39,7 @@ void     set_size(fdf_struct *data, char *name)
     close(fd);
 }
 
-void fill_matrix(int *new_line, char *line)
+void fill_matrix(fdf_point *new_line, char *line)
 {
     int i;
     int j;
@@ -50,7 +50,7 @@ void fill_matrix(int *new_line, char *line)
     z_arr = ft_strsplit(line, ' ');
     while (z_arr[i])
     {
-        new_line[i] = ft_atoi(z_arr[i]);
+        new_line[i].z = ft_atoi(z_arr[i]);
         free(z_arr[i++]);
     }
     free(z_arr);
@@ -65,10 +65,10 @@ void  read_file(char* name, fdf_struct *data)
     i = 0;
     fd = 0;
     set_size(data, name);
-    data->z_matrix = (int **)malloc(sizeof(int*) * (data->h + 1));
+    data->z_matrix = (fdf_point **)malloc(sizeof(fdf_point*) * (data->h + 1));
     while (i <= data->h)
     {
-        data->z_matrix[i++] = (int *)malloc(sizeof(int) * data->w + 1);
+        data->z_matrix[i++] = (fdf_point *)malloc(sizeof(fdf_point) * data->w + 1);
     }
     i = 0;
     fd = open(name, O_RDONLY, 0);
