@@ -63,7 +63,7 @@ void	rotate_z(float *x, float *y, int angle);
 void    before_draw(fdf_struct *data);
 void    error(char *msg);
 int     get_color(fdf_point current, fdf_point start, fdf_point end);
-void    set_start_settings(char *arg,fdf_struct *data);
+void    set_start_settings(char *arg, fdf_struct *data);
 void    translation_xyz(fdf_point *p1, fdf_point *p2, fdf_struct *data);
 void    set_extremums(fdf_struct *data);
 int     get_color_z(float current, float start, float end, fdf_struct *data);

@@ -3,7 +3,6 @@
 void    free_arr(fdf_struct *data)
 {
     int i;
-    int j;
 
     i = 0;
     while (i < data->h)

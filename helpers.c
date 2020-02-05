@@ -29,7 +29,7 @@ void    set_extremums(fdf_struct *data)
     }
 }
 
-void    set_start_settings(char *arg,fdf_struct *data)
+void    set_start_settings(char *arg, fdf_struct *data)
 {
         read_file(arg, data);
         set_extremums(data);
