@@ -32,7 +32,7 @@ typedef struct
 {
     int w;
     int h;
-    fdf_point **z_matrix;
+    int **z_matrix;
     int zoom;
     int x_shift;
     int y_shift;
@@ -49,9 +49,9 @@ typedef struct
     void *win_ptr;
 }       fdf_struct;
 
-void    read_file(char* name, fdf_struct *data);
+int     read_file(char* name, fdf_struct *data);
 int		ft_wdcounter(char const *str, char c);
-void    fill_z_matrix(fdf_point *new_line, char *line);
+int     fill_matrix(int *new_line, char *line);
 void    bresenham(fdf_point p1, fdf_point p2, fdf_struct *data);
 void    draw_map(int x, int y, fdf_struct *data);
 void    three_d(float *x, float *y, int z);
@@ -68,5 +68,12 @@ void    translation_xyz(fdf_point *p1, fdf_point *p2, fdf_struct *data);
 void    set_extremums(fdf_struct *data);
 int     get_color_z(float current, float start, float end, fdf_struct *data);
 void    free_arr(fdf_struct *data);
+int     set_size(fdf_struct *data, char *name);
+int		ft_isdigit_base(char c, int base);
+int	    ft_has_prefix(const char *str, int base);
+int		ft_isnumber(char *str, int base);
+int		ft_atoi_base(const char *str, int base);
+int		ft_isspace(int c);
+int     allocate_matrix(fdf_struct *data);
 
 #endif

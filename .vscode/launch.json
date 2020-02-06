@@ -10,7 +10,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["test_maps/42.fdf"],
+            "args": ["test_maps/pyra.fdf"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

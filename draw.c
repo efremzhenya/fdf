@@ -31,21 +31,22 @@ void draw_map(int x, int y, fdf_struct *data)
         x = 0;
         while (data->w > x)
         {
-            p1 = (fdf_point){.x = x, .y = y, .z = data->z_matrix[y][x].z};
+            p1 = (fdf_point){.x = x, .y = y, .z = data->z_matrix[y][x]};
             if (x < data->w - 1)
             {
-                p2 = (fdf_point){.x = x + 1, .y = y, .z = data->z_matrix[y][x + 1].z};
+                p2 = (fdf_point){.x = x + 1, .y = y, .z = data->z_matrix[y][x + 1]};
                 bresenham(p1, p2, data);
             }
             if (y < data->h - 1)
             {
-                p2 = (fdf_point){.x = x, .y = y + 1, .z = data->z_matrix[y + 1][x].z};
+                p2 = (fdf_point){.x = x, .y = y + 1, .z = data->z_matrix[y + 1][x]};
                 bresenham(p1, p2, data);
             }
             x++;
         }
         y++;
     }
+    draw_menu(data);
 }
 
 void before_draw(fdf_struct *data)
@@ -68,27 +69,19 @@ void before_draw(fdf_struct *data)
     {
         msg = "ERROR ON MAX/MIN ZOOM!";
         mlx_string_put(data->mlx_ptr, data->win_ptr, (WINWIDTH-170)/2, (WINHEIGHT-100)/2, 0xE85E5E, msg);
-        data->zoom = (data->zoom>=200) ? 200 : 1;
+        data->zoom = (data->zoom >= 200) ? 200 : 1;
     }
 }
 
 void	draw_menu(fdf_struct *data)
 {
-	char *msg;
-
     if (data->is_hide)
     {
-        msg = "MOVE: up, down, left, right";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 5, 0xE85E5E, msg);
-        msg = "VIEW MODE: space";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 20, 0x03fc35, msg);
-        msg = "ZOOM: +, -";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 35, 0x03fc35, msg);
-        msg = "ROTATE AXIS X: 2, 8; AXIS Y: 4, 6";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 50, 0x03fc35, msg);
-        msg = "EXIT: Esc";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 65, 0x03fc35, msg);
-        msg = "HIDE INFO: H";
-        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 80, 0x03fc35, msg);   
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 5, 0xE85E5E, "MOVE: up, down, left, right");
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 20, 0x03fc35, "VIEW MODE: space");
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 35, 0x03fc35, "ZOOM: +, -");
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 50, 0x03fc35, "ROTATE AXIS X: 2, 8; AXIS Y: 4, 6");
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 65, 0x03fc35, "EXIT: Esc");
+        mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 80, 0x03fc35, "HIDE INFO: H");   
     }
 }
